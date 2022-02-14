@@ -1,0 +1,44 @@
+
+    public void savePoints() {
+        SharedPreferences mPrefs6 = getSharedPreferences(savePoints, MODE_PRIVATE);
+
+        SharedPreferences.Editor prefsEditor6 = mPrefs6.edit();
+        Gson gson6 = new Gson();
+        String jsonTextPoint = gson6.toJson(point);
+
+        prefsEditor6.putString(savePoints, jsonTextPoint);
+        prefsEditor6.commit();
+    }
+
+    public void saveFrequency() {
+        SharedPreferences mPrefs7 = getSharedPreferences(saveFrequency, MODE_PRIVATE);
+
+        SharedPreferences.Editor prefsEditor7 = mPrefs7.edit();
+        Gson gson7 = new Gson();
+        String jsonTextFrequency = gson7.toJson(frequency);
+
+        prefsEditor7.putString(saveFrequency, jsonTextFrequency);
+        prefsEditor7.commit();
+    }
+
+    public void loadPoint() {
+        SharedPreferences mPrefs6 = getSharedPreferences(savePoints, MODE_PRIVATE);
+        Gson gson6 = new Gson();
+        String json6 = mPrefs6.getString(savePoints, "");
+        Type typeMyType = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        if (gson6.fromJson(json6, typeMyType) != null) {
+            point = gson6.fromJson(json6, typeMyType);
+        }
+    }
+
+    public void loadFrequency() {
+        SharedPreferences mPrefs7 = getSharedPreferences(saveFrequency, MODE_PRIVATE);
+        Gson gson7 = new Gson();
+        String json7 = mPrefs7.getString(saveFrequency, "");
+        Type typeMyType = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        if (gson7.fromJson(json7, typeMyType) != null) {
+            frequency = gson7.fromJson(json7, typeMyType);
+        }
+    }
